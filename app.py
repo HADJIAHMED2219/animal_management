@@ -263,33 +263,56 @@ def notify_admin_on_change(breeder_id, action):
     try:
         users = get_users()
         print(f"[DEBUG] Utilisateurs récupérés : {users}")
+
+        # Récupérer les emails des admins
         admin_emails = [user['Email'] for user in users if user['Role'] == 'admin']
         print(f"[DEBUG] Emails admin trouvés : {admin_emails}")
 
+        # Récupérer l’éleveur concerné
         breeder = next((user for user in users if str(user['Eleveur_ID']) == str(breeder_id)), None)
 
-        if not admin_emails:
-            print("[DEBUG] Aucun email admin trouvé. Notification annulée.")
+        if not breeder:
+            print(f"[DEBUG] Aucun éleveur trouvé avec l’ID {breeder_id}")
             return False
 
+        # Création du contenu de l’email
         subject = "Animal Database Modification Alert"
         body = f"""Breeder data modification detected:
 
 - Breeder ID: {breeder_id}
-- Breeder Name: {breeder['Username'] if breeder else 'Unknown'}
+- Breeder Name: {breeder['Username']}
 - Action: {action}
 - Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 Please review the changes in the admin dashboard."""
 
+        # Envoyer l’email à tous les admins
         for email in admin_emails:
             send_email(email, subject, body)
-            print(f"[DEBUG] Email envoyé à : {email}")
+            print(f"[DEBUG] Email envoyé à l'admin : {email}")
+
+        # Envoyer l’email à l’éleveur concerné
+        subject_breeder = "Your Animal Data Has Been Updated"
+        body_breeder = f"""Dear {breeder['Username']},
+
+Your animal data has been successfully synchronized.
+
+- Action performed: {action}
+- Synchronization time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+You can review your updated data in your dashboard.
+
+Best regards."""
+
+        send_email(breeder['Email'], subject_breeder, body_breeder)
+        print(f"[DEBUG] Email envoyé à l'éleveur : {breeder['Email']}")
 
         return True
+
     except Exception as e:
-        print(f"Failed to send admin notification: {e}")
+        print(f"Failed to send notifications: {e}")
         return False
+
 
 @app.route('/simulator')
 def simulator():
