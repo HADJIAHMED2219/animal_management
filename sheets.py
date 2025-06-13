@@ -26,8 +26,25 @@ def add_user(username, password, role, email, eleveur_id):
 def get_registration_requests():
     return requests_sheet.get_all_records()
 
+from datetime import datetime
+
 def add_registration_request(name, first_name, email, card_number, status="en attente"):
-    requests_sheet.append_row([name, first_name, email, card_number, status])
+    # Récupérer toutes les demandes existantes
+    existing_requests = requests_sheet.get_all_records()
+    
+    # Calculer le prochain ID automatiquement
+    next_id = len(existing_requests) + 1
+
+    # Ajouter la nouvelle demande dans le bon ordre des colonnes
+    requests_sheet.append_row([
+        next_id,               # Colonne A : ID
+        name,                  # Colonne B : Name
+        first_name,            # Colonne C : First_name
+        email,                 # Colonne D : Email
+        card_number,           # Colonne E : Card_number
+        status,                # Colonne F : Status
+        datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Colonne G : Request_date
+    ])
 
 def get_animals_for_eleveur(eleveur_id):
     animals = animal_sheet.get_all_records()
