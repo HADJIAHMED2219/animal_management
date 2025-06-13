@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -17,15 +16,15 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['HADJIAhmed']
-        password = request.form['07No1986/']
+        username = request.form['username']  # Correction ici
+        password = request.form['password']  # Correction ici
 
         users = get_users()
         user = next((u for u in users if u['Username'] == username), None)
 
         if user:
             if (user['Password'].startswith('pbkdf2:') and 
-                check_password_hash(user['Password'], password)) or                 user['Password'] == password:
+                check_password_hash(user['Password'], password)) or user['Password'] == password:
 
                 session['user_id'] = user['Eleveur_ID']
                 session['username'] = user['Username']
@@ -60,11 +59,11 @@ def register_request():
         admin_emails = [user['Email'] for user in get_users() if user['Role'] == 'admin']
 
         subject = "New Registration Request"
-        body = f"A new registration request has been submitted:
+        body = f"""A new registration request has been submitted:
 
 Name: {name} {first_name}
 Email: {email}
-Card Number: {card_number}"
+Card Number: {card_number}"""
 
         for admin_email in admin_emails:
             send_email(admin_email, subject, body)
@@ -143,14 +142,14 @@ def process_request(request_id, action):
         requests_sheet.update_cell(sheet_row, 5, 'accepté')
 
         subject = "Your Registration Has Been Approved"
-        body = f"Dear {req['First_name']} {req['Name']},
+        body = f"""Dear {req['First_name']} {req['Name']},
 
 Your registration request has been approved. Here are your login credentials:
 
 Username: {username}
 Password: {password}
 
-Best regards."
+Best regards."""
 
         send_email(req['Email'], subject, body)
         flash('Request approved and user created', 'success')
@@ -159,11 +158,11 @@ Best regards."
         requests_sheet.update_cell(sheet_row, 5, 'refusé')
 
         subject = "Your Registration Has Been Rejected"
-        body = f"Dear {req['First_name']} {req['Name']},
+        body = f"""Dear {req['First_name']} {req['Name']},
 
 We regret to inform you that your registration request has been rejected.
 
-Best regards."
+Best regards."""
 
         send_email(req['Email'], subject, body)
         flash('Request rejected', 'info')
@@ -267,14 +266,14 @@ def notify_admin_on_change(breeder_id, action):
             return False
 
         subject = "Animal Database Modification Alert"
-        body = f"Breeder data modification detected:
+        body = f"""Breeder data modification detected:
 
 - Breeder ID: {breeder_id}
 - Breeder Name: {breeder['Username'] if breeder else 'Unknown'}
 - Action: {action}
 - Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
-Please review the changes in the admin dashboard."
+Please review the changes in the admin dashboard."""
 
         for email in admin_emails:
             send_email(email, subject, body)
@@ -307,13 +306,7 @@ def send_monthly_notifications():
         eleveurs = [user for user in users if user['Role'] == 'éleveur']
 
         subject = "Monthly Reminder: Synchronize Your Animals"
-        body = "Dear Eleveur,
-
-This is a monthly reminder to synchronize your animal data with the central database.
-
-Please ensure all your animals' information is up to date.
-
-Best regards."
+        body = "Dear Eleveur,\n\nThis is a monthly reminder to synchronize your animal data with the central database.\n\nPlease ensure all your animals' information is up to date.\n\nBest regards."
 
         for eleveur in eleveurs:
             send_email(eleveur['Email'], subject, body)
