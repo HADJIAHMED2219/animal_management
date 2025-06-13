@@ -16,8 +16,8 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['HADJIAhmed']  # Correction ici
-        password = request.form['07No1986/']  # Correction ici
+        username = request.form['HADJIAhmed']
+        password = request.form['07No1986/']
 
         users = get_users()
         user = next((u for u in users if u['Username'] == username), None)
@@ -184,6 +184,8 @@ def sync_animals():
     if 'user_id' not in session:
         return jsonify({'status': 'error', 'message': 'Not authenticated'}), 401
 
+    print(f"[DEBUG] Synchronisation des animaux appelée par l'éleveur ID {session['user_id']}")
+
     data = request.json
     eleveur_id = session['user_id']
 
@@ -236,6 +238,7 @@ def sync_animals():
         elif after_count < before_count:
             action = f"Removed {before_count - after_count} animals"
 
+        print(f"[DEBUG] Action détectée : {action}")
         notify_admin_on_change(eleveur_id, action)
 
         return jsonify({'status': 'success', 'message': f'Animals synchronized successfully. {action}'})
@@ -259,10 +262,14 @@ def breeder_animals(breeder_id):
 def notify_admin_on_change(breeder_id, action):
     try:
         users = get_users()
+        print(f"[DEBUG] Utilisateurs récupérés : {users}")
         admin_emails = [user['Email'] for user in users if user['Role'] == 'admin']
+        print(f"[DEBUG] Emails admin trouvés : {admin_emails}")
+
         breeder = next((user for user in users if str(user['Eleveur_ID']) == str(breeder_id)), None)
 
         if not admin_emails:
+            print("[DEBUG] Aucun email admin trouvé. Notification annulée.")
             return False
 
         subject = "Animal Database Modification Alert"
@@ -277,6 +284,7 @@ Please review the changes in the admin dashboard."""
 
         for email in admin_emails:
             send_email(email, subject, body)
+            print(f"[DEBUG] Email envoyé à : {email}")
 
         return True
     except Exception as e:
