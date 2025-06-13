@@ -10,7 +10,7 @@ creds_dict = json.loads(creds_json)
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 
-sheet_file = client.open("Gestion_Animaux")
+sheet_file = client.open("Animaux ESP32")
 
 # Connexion aux 3 feuilles
 animal_sheet = sheet_file.worksheet("animal")
