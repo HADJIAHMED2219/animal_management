@@ -1,11 +1,10 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    color: #333;
+header {
     background-image: url('/static/images/ferme.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
