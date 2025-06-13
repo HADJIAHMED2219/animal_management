@@ -16,8 +16,8 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']  # Correction ici
-        password = request.form['password']  # Correction ici
+        username = request.form['HADJIAhmed']  # Correction ici
+        password = request.form['07No1986/']  # Correction ici
 
         users = get_users()
         user = next((u for u in users if u['Username'] == username), None)
