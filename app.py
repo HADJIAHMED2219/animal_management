@@ -139,7 +139,7 @@ def process_request(request_id, action):
         hashed_password = generate_password_hash(password)
         add_user(username, hashed_password, 'éleveur', req['Email'], new_eleveur_id)
 
-        requests_sheet.update_cell(sheet_row, 5, 'accepté')
+        requests_sheet.update_cell(sheet_row, 6, 'accepté')
 
         subject = "Your Registration Has Been Approved"
         body = f"""Dear {req['First_name']} {req['Name']},
@@ -155,7 +155,7 @@ Best regards."""
         flash('Request approved and user created', 'success')
 
     elif action == 'reject':
-        requests_sheet.update_cell(sheet_row, 5, 'refusé')
+        requests_sheet.update_cell(sheet_row, 6, 'refusé')
 
         subject = "Your Registration Has Been Rejected"
         body = f"""Dear {req['First_name']} {req['Name']},
