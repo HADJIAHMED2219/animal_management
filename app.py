@@ -199,16 +199,21 @@ def sync_animals():
         other_animals = [animal for animal in all_animals if str(animal['Eleveur_ID']) != str(eleveur_id)]
 
         new_animals = []
-        for animal in data['animals']:
-            new_animals.append([
-                animal['rfid_tag'],
-                animal['category'],
-                animal['gender'],
-                animal['birth_date'],
-                animal['vaccines'],
-                eleveur_id,
-                datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            ])
+        current_animals = animal_sheet.get_all_records()
+next_id = len(current_animals) + 1  # Calcul du prochain ID
+
+for animal in data['animals']:
+    animal_sheet.append_row([
+        next_id,                               # ID automatique
+        animal['rfid_tag'],
+        animal['category'],
+        animal['gender'],
+        animal['birth_date'],
+        animal['vaccines'],
+        eleveur_id,
+        datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    ])
+    next_id += 1  # Incrémenter l'ID pour le prochain animal
 
         final_animals = []
         for animal in other_animals:
@@ -225,7 +230,7 @@ def sync_animals():
         final_animals.extend(new_animals)
 
         animal_sheet.clear()
-        animal_sheet.append_row(['RFID_tag', 'Category', 'Gender', 'Birth_date', 'Vaccines', 'Eleveur_ID', 'Last_sync'])
+        animal_sheet.append_row(['ID', 'RFID_tag', 'Category', 'Gender', 'Birth_date', 'Vaccines', 'Eleveur_ID', 'Last_sync'])
         animal_sheet.append_rows(final_animals)
 
         after_count = len(new_animals)
