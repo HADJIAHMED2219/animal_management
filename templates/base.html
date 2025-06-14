@@ -30,9 +30,6 @@
     
     <main>
         
-    <div class="university-logo-fixed">
-        <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo">
-    </div>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flash-messages">
@@ -45,7 +42,9 @@
         
         {% block content %}{% endblock %}
     </main>
-    
+    <div class="university-logo-fixed">
+        <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo">
+    </div>
     <footer>
         <p>&copy; 2024 University of Sidi Bel Abbes - Animal Management System</p>
     </footer>
