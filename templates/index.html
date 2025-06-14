@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="hero">
-        <h2>Web Access to the National Database</h2>
-        <p>As part of the 2024/2025 Start-up Project: Intelligent system, using RFID technology, for the census and remote monitoring of livestock.</p>
-        
-        <div class="actions">
-            <a href="{{ url_for('login') }}" class="btn">Login</a>
-            <a href="{{ url_for('register_request') }}" class="btn">Request Registration</a>
+    <div class="hero-split">
+        <div class="hero-left">
+            <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="Hero Image">
+        </div>
+        <div class="hero-right">
+            <h2>Web Access to the National Database</h2>
+            <p>As part of the 2024/2025 Start-up Project: Intelligent system, using RFID technology, for the census and remote monitoring of livestock.</p>
+            
+            <div class="actions">
+                <a href="{{ url_for('login') }}" class="btn">Login</a>
+                <a href="{{ url_for('register_request') }}" class="btn">Request Registration</a>
+            </div>
         </div>
     </div>
-{% endblock %}           
+{% endblock %}
