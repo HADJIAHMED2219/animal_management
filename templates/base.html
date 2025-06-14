@@ -12,9 +12,6 @@
     </header>
     
     <nav>
-        <div class="university-logo-fixed">
-        <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo">
-        </div>
         {% if 'user_id' in session %}
             <a href="{{ url_for('index') }}">Home</a>
             {% if session['role'] == 'admin' %}
@@ -32,7 +29,24 @@
     </nav>
     
     <main>
-        
+        <!-- Section Logo + Contenu -->
+        <div class="main-content">
+            <!-- Logo à gauche -->
+            <div class="university-logo-fixed">
+                <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo">
+            </div>
+
+            <!-- Texte et boutons -->
+            <div class="hero-text">
+                <h1>Web Access to the National Database</h1>
+                <p>As part of the 2024/2025 Start-up Project: Intelligent system, using RFID technology, for the census and remote monitoring of livestock.</p>
+                <div class="actions">
+                    <a href="{{ url_for('login') }}" class="btn">Login</a>
+                    <a href="{{ url_for('register_request') }}" class="btn">Request Registration</a>
+                </div>
+            </div>
+        </div>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flash-messages">
@@ -50,4 +64,4 @@
         <p>&copy; 2024 University of Sidi Bel Abbes - Animal Management System</p>
     </footer>
 </body>
-</html>        
+</html>
