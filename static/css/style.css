@@ -53,6 +53,10 @@ header {
 h1, h2, h3 {
     color: #2c3e50;
 }
+/* Couleur des titres dans le header uniquement */
+header h1, header h2, header h3 {
+    color: white; /* ou la couleur que tu veux */
+}    
 
 nav {
     background-color: #34495e;
