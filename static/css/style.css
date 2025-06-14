@@ -21,18 +21,18 @@
 
 /* Logo fixé à gauche de la page, hors header */
 .university-logo-fixed {
-    position: left: 20px;
+    position: fixed; /* Correction ici */
     top: 100px; /* Ajuster la distance du haut */
-    left: 20px;
-    width: 120px; /* Ajuster la taille */
+    left: 20px; /* Distance du côté gauche */
+    width: 120px; /* Taille du logo */
     z-index: 999; /* Toujours visible */
 }
 
 .university-logo-fixed img {
     width: 100%;
     height: auto;
+    border-radius: 8px; /* Optionnel : coins arrondis */
 }
-
 
 /* Header avec image de fond uniquement */
 header {
@@ -53,10 +53,11 @@ header {
 h1, h2, h3 {
     color: #2c3e50;
 }
+
 /* Couleur des titres dans le header uniquement */
 header h1, header h2, header h3 {
-    color: white; /* ou la couleur que tu veux */
-}    
+    color: white;
+}
 
 nav {
     background-color: #34495e;
