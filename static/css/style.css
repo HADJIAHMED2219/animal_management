@@ -36,9 +36,8 @@ header {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: white;
-    padding: 1rem;
-    display: flex;
+    color: #fff;
+    padding: 2rem;
     justify-content: center; /* Centrage du texte */
     align-items: center;
     height: 230px;
