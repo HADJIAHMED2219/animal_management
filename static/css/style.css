@@ -21,7 +21,7 @@
 
 /* Logo fixé à gauche de la page, hors header */
 .university-logo-fixed {
-    position: fixed;
+    position: left: 20px;
     top: 100px; /* Ajuster la distance du haut */
     left: 20px;
     width: 120px; /* Ajuster la taille */
