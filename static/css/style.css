@@ -19,15 +19,20 @@
     overflow-x: auto;
 }
 
-/* Logo fixé à gauche de la page, en dehors de l'en-tête */
+/* Logo fixé à gauche de la page, hors header */
 .university-logo-fixed {
     position: fixed;
-    top: 100px; /* Descendre un peu sous le header */
+    top: 100px; /* Ajuster la distance du haut */
     left: 20px;
-    width: 120px;
-    height: auto;
-    z-index: 999; /* Pour rester toujours au-dessus */
+    width: 120px; /* Ajuster la taille */
+    z-index: 999; /* Toujours visible */
 }
+
+.university-logo-fixed img {
+    width: 100%;
+    height: auto;
+}
+
 
 /* Header avec image de fond uniquement */
 header {
