@@ -20,13 +20,13 @@
 }
 
 /* Logo fixé à gauche de la page, en dehors de l'en-tête */
-.university-logo {
+.university-logo-fixed {
     position: fixed;
-    top: autopx;
-    left: autopx;
-    width: autopx; /* Taille entre 150 et 200px */
+    top: 20px;
+    left: 20px;
+    width: 120px; /* Taille ajustable */
     height: auto;
-    z-index: 1000; /* Toujours au premier plan */
+    z-index: 999; /* Pour rester toujours au-dessus */
 }
 
 /* Header avec image de fond uniquement */
