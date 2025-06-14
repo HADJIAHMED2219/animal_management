@@ -22,9 +22,9 @@
 /* Logo fixé à gauche de la page, en dehors de l'en-tête */
 .university-logo {
     position: fixed;
-    top: auto;
-    left: auto;
-    width: auto; /* Taille entre 150 et 200px */
+    top: autopx;
+    left: autopx;
+    width: autopx; /* Taille entre 150 et 200px */
     height: auto;
     z-index: 1000; /* Toujours au premier plan */
 }
@@ -39,7 +39,7 @@ header {
     color: white;
     padding: 1rem;
     display: flex;
-    justify-content: center; /* Centrage horizontal */
+    justify-content: center; /* Centrage du texte */
     align-items: center;
     height: 230px;
 }
