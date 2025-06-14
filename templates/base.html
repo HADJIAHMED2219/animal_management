@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+
+    <!-- Logo Université fixe à gauche -->
+    <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo" class="university-logo-fixed">
+
+    <!-- En-tête avec image de fond uniquement -->
     <header>
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo" class="logo">
-        </div>
         <h1>Animal Management System</h1>
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/university_logo.png') }}" alt="University Logo" class="logo">
-        </div>
     </header>
     
     <nav>
@@ -52,4 +51,4 @@
         <p>&copy; 2024 University of Sidi Bel Abbes - Animal Management System</p>
     </footer>
 </body>
-</html>        
+</html>
